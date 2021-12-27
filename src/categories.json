@@ -1,0 +1,22 @@
+{
+  "Objeto": [
+    "Faca", "Caneta", "Porta-Retrato", "Pente",
+    "Óculos", "Garrafa", "Ventilador"
+  ],
+  "Ação": [
+    "Correr", "Pular", "Dormir", "Comer", "Pentear", "Caçar",
+    "Jogar", "Lamber", "Deitar", "Ouvir", "Ler", "Olhar",
+    "Viver", "Respirar", "Gritar", "Nadar", "Voar", "Dançar",
+    "Digitar", "Escrever", "Apagar", "Regar", "Pegar", "Soltar",
+    "Usar", "Cobrir", "Fazer", "Beber", "Comer", "Beijar", "Abraçar",
+    "Sorrir", "Chorar", "Abrir", "Fechar", "Montar", "Folhear", "Piscar",
+    "Mexer", "Tremer", "Trabalhar", "Escovar", "Vestir", "Hidratar", "Nutrir",
+    "Reconstruir", "Construir", "Destruir"
+  ],
+  "Filmes": [
+    "Não Olhe Para Cima", "Auto da Compadecida", "A Era do Gelo"
+  ],
+  "Musicas Internacionais":[
+    ""
+  ]
+}
