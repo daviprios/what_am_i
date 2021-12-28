@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {RouteProp, useRoute} from '@react-navigation/core';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/core';
 import {Text, View} from 'react-native';
 
 import {StackParamList} from './App';
 import Card from './card';
 
 type GameParamList = RouteProp<StackParamList, 'Game'>;
+type GameProp = StackNavigationProp<StackParamList, 'Game'>;
 
 const shuffleStringArray = (stringArray: Array<string>) => {
   let currentIndex = stringArray.length,
@@ -27,6 +29,7 @@ const shuffleStringArray = (stringArray: Array<string>) => {
 
 const Game = () => {
   const route = useRoute<GameParamList>();
+  const navigation = useNavigation<GameProp>();
 
   const [correctScore, setCorrectScore] = useState(0);
   const [wrongScore, setWrongScore] = useState(0);
@@ -40,6 +43,8 @@ const Game = () => {
   const [currentWord, setCurrentWord] = useState(
     () => categoryValuesOrganized[0],
   );
+
+  const [remainingTime, setRemainingTime] = useState(90);
 
   const nextWord = (response: string) => {
     if (currentWordIndex === categoryValuesOrganized.length + 1) {
@@ -63,9 +68,20 @@ const Game = () => {
     setCurrentWordIndex(prev => prev + 1);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (remainingTime > 0) {
+        setRemainingTime(prev => prev - 1);
+      } else {
+        navigation.navigate('Home');
+      }
+    }, 1000);
+  }, [navigation, remainingTime]);
+
   return (
     <View>
       <Text>
+        {remainingTime}
         <Card word={currentWord} nextWord={nextWord} />
         {correctScore}
         {passScore}
