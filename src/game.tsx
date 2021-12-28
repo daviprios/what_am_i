@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import {Text, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/core';
-import {Text, View} from 'react-native';
-
 import {StackParamList} from './App';
+
 import Card from './card';
 
 type GameParamList = RouteProp<StackParamList, 'Game'>;
@@ -44,7 +44,7 @@ const Game = () => {
     () => categoryValuesOrganized[0],
   );
 
-  const [remainingTime, setRemainingTime] = useState(90);
+  const [remainingTime, setRemainingTime] = useState(60);
 
   const nextWord = (response: string) => {
     if (currentWordIndex === categoryValuesOrganized.length + 1) {
@@ -68,15 +68,28 @@ const Game = () => {
     setCurrentWordIndex(prev => prev + 1);
   };
 
+  const navigateToEndScreen = () => {
+    navigation.navigate({
+      name: 'EndScreen',
+      params: {
+        correctResponses: correctScore,
+        passedResponses: passScore,
+        wrongResponses: wrongScore,
+      },
+      merge: true,
+    });
+  };
+
   useEffect(() => {
     setTimeout(() => {
       if (remainingTime > 0) {
         setRemainingTime(prev => prev - 1);
       } else {
-        navigation.navigate('Home');
+        navigateToEndScreen();
       }
     }, 1000);
-  }, [navigation, remainingTime]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remainingTime]);
 
   return (
     <View>
