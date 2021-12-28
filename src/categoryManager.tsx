@@ -22,3 +22,4 @@ const CategoryManager = () => {
 };
 
 export default CategoryManager;
+export type {Categories};

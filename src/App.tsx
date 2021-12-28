@@ -1,28 +1,32 @@
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
 
-import CategoryManager from './categoryManager';
-import Category from './category';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import Home from './home';
+import Game from './game';
+
+interface StackParamList {
+  [key: string]: undefined | object;
+
+  Home: undefined;
+  Game: {categoryValues: Array<string>};
+}
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const categoryManager = CategoryManager();
-  const categories = categoryManager.getAllCategories();
-  const categoriesName = [];
-
-  for (const [key] of Object.entries(categories)) {
-    categoriesName.push(key);
-  }
-
   return (
-    <View>
-      <Text>Quem sou eu?</Text>
-      <ScrollView>
-        {categoriesName.map(name => {
-          return <Category key={name} name={name} />;
-        })}
-      </ScrollView>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Game" component={Game} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
 export default App;
+export type {StackParamList};
