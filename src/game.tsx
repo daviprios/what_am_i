@@ -81,13 +81,17 @@ const Game = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (remainingTime > 0) {
         setRemainingTime(prev => prev - 1);
       } else {
         navigateToEndScreen();
       }
     }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remainingTime]);
 

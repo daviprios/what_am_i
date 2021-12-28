@@ -3,7 +3,7 @@
     "Faca", "Caneta", "Porta-Retrato", "Pente",
     "Óculos", "Garrafa", "Ventilador"
   ],
-  "Ação": [
+  "Verbos": [
     "Correr", "Pular", "Dormir", "Comer", "Pentear", "Caçar",
     "Jogar", "Lamber", "Deitar", "Ouvir", "Ler", "Olhar",
     "Viver", "Respirar", "Gritar", "Nadar", "Voar", "Dançar",
