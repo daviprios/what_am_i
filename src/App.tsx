@@ -8,6 +8,7 @@ import Orientation from 'react-native-orientation';
 import Home from './home';
 import Game from './game';
 import EndScreen from './endscreen';
+import {StatusBar} from 'react-native';
 
 interface StackParamList {
   [key: string]: undefined | object;
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
+      <StatusBar hidden />
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{headerShown: false}}>
