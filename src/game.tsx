@@ -42,7 +42,7 @@ const Game = () => {
     () => categoryValuesOrganized[0],
   );
 
-  const [remainingTime, setRemainingTime] = useState(60);
+  const [remainingTime, setRemainingTime] = useState(1);
 
   const nextWord = (response: string) => {
     if (currentWordIndex === categoryValuesOrganized.length + 1) {

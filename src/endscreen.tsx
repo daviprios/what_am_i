@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -15,15 +15,62 @@ const Endscreen = () => {
   const {correctResponses, passedResponses, wrongResponses} = route.params;
 
   return (
-    <View>
-      <Text>Correct: {correctResponses}</Text>
-      <Text>Passed: {passedResponses}</Text>
-      <Text>Wrong: {wrongResponses}</Text>
-      <Button title="Continue" onPress={() => navigation.navigate('Home')} />
+    <View style={styles.container}>
+      <Text style={{...styles.text, color: 'green'}}>
+        Correct: <Text style={styles.number}>{correctResponses}</Text>
+      </Text>
+      <Text style={{...styles.text, color: 'orange'}}>
+        Passed: <Text style={styles.number}>{passedResponses}</Text>
+      </Text>
+      <Text style={{...styles.text, color: 'red'}}>
+        Wrong: <Text style={styles.number}>{wrongResponses}</Text>
+      </Text>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate('Home')}>
+        <Text style={styles.buttonText}>Continue</Text>
+      </Pressable>
     </View>
   );
 };
 
 export default Endscreen;
 
-//const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    height: '100%',
+    width: '100%',
+  },
+  text: {
+    marginBottom: 15,
+
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  number: {
+    color: 'blue',
+  },
+  button: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    height: 60,
+    width: '80%',
+
+    marginTop: 30,
+
+    backgroundColor: 'blue',
+
+    borderRadius: 15,
+  },
+  buttonText: {
+    color: 'white',
+
+    fontSize: 25,
+  },
+});
