@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/core';
 import {StackParamList} from './App';
-
-import Card from './card';
 
 type GameParamList = RouteProp<StackParamList, 'Game'>;
 type GameProp = StackNavigationProp<StackParamList, 'Game'>;
@@ -99,7 +97,10 @@ const Game = () => {
     <View>
       <Text>
         {remainingTime}
-        <Card word={currentWord} nextWord={nextWord} />
+        <Text>{currentWord}</Text>
+        <Button title="Correct" onPress={() => nextWord('Correct')} />
+        <Button title="Pass" onPress={() => nextWord('Pass')} />
+        <Button title="Wrong" onPress={() => nextWord('Wrong')} />
         {correctScore}
         {passScore}
         {wrongScore}
