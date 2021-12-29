@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
+
+import Orientation from 'react-native-orientation';
 
 import CategoryManager from './categoryManager';
 import Category from './category';
@@ -12,6 +14,10 @@ const Home = () => {
   for (const [key] of Object.entries(categories)) {
     categoriesName.push(key);
   }
+
+  useEffect(() => {
+    Orientation.lockToPortrait();
+  }, []);
 
   return (
     <View style={styles.container}>

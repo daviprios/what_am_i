@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/core';
 import {StackParamList} from './App';
+
+import Orientation from 'react-native-orientation';
 
 type GameParamList = RouteProp<StackParamList, 'Game'>;
 type GameProp = StackNavigationProp<StackParamList, 'Game'>;
@@ -42,7 +44,7 @@ const Game = () => {
     () => categoryValuesOrganized[0],
   );
 
-  const [remainingTime, setRemainingTime] = useState(1);
+  const [remainingTime, setRemainingTime] = useState(3);
 
   const nextWord = (response: string) => {
     if (currentWordIndex === categoryValuesOrganized.length + 1) {
@@ -79,10 +81,18 @@ const Game = () => {
   };
 
   useEffect(() => {
+    Orientation.lockToLandscape();
+    return () => {
+      Orientation.lockToPortrait();
+    };
+  }, []);
+
+  useEffect(() => {
     const timeout = setTimeout(() => {
       if (remainingTime > 0) {
         setRemainingTime(prev => prev - 1);
       } else {
+        Orientation.lockToPortrait();
         navigateToEndScreen();
       }
     }, 1000);
@@ -95,20 +105,30 @@ const Game = () => {
 
   return (
     <View>
-      <Text>
-        {remainingTime}
-        <Text>{currentWord}</Text>
-        <Button title="Correct" onPress={() => nextWord('Correct')} />
-        <Button title="Pass" onPress={() => nextWord('Pass')} />
-        <Button title="Wrong" onPress={() => nextWord('Wrong')} />
-        {correctScore}
-        {passScore}
-        {wrongScore}
-      </Text>
+      <Text style={styles.counter}>{remainingTime}</Text>
+      <Text>{currentWord}</Text>
+      <Button title="Correct" onPress={() => nextWord('Correct')} />
+      <Button title="Pass" onPress={() => nextWord('Pass')} />
+      <Button title="Wrong" onPress={() => nextWord('Wrong')} />
+      <Text>{correctScore}</Text>
+      <Text>{passScore}</Text>
+      <Text>{wrongScore}</Text>
     </View>
   );
 };
 
 export default Game;
 
-//const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  counter: {
+    position: 'absolute',
+    top: 15,
+    zIndex: 10,
+
+    width: '100%',
+
+    textAlign: 'center',
+
+    fontWeight: 'bold',
+  },
+});
