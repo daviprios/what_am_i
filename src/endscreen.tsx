@@ -19,7 +19,7 @@ const Endscreen = () => {
       <Text style={{...styles.text, color: 'green'}}>
         Correct: <Text style={styles.number}>{correctResponses}</Text>
       </Text>
-      <Text style={{...styles.text, color: 'orange'}}>
+      <Text style={{...styles.text, color: 'blue'}}>
         Passed: <Text style={styles.number}>{passedResponses}</Text>
       </Text>
       <Text style={{...styles.text, color: 'red'}}>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   number: {
-    color: 'blue',
+    color: 'black',
   },
   button: {
     display: 'flex',

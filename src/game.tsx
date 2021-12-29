@@ -137,13 +137,15 @@ const styles = StyleSheet.create({
   counter: {
     position: 'absolute',
     top: 15,
-    zIndex: -10,
 
     width: '100%',
 
     textAlign: 'center',
 
+    color: 'black',
+
     fontWeight: 'bold',
+    fontSize: 30,
   },
   word: {
     position: 'absolute',
@@ -156,10 +158,14 @@ const styles = StyleSheet.create({
 
     padding: 30,
 
+    color: 'black',
     fontSize: 30,
+    fontWeight: 'bold',
   },
   buttonContainer: {
     position: 'absolute',
+
+    zIndex: 10,
 
     display: 'flex',
     flexDirection: 'row',
