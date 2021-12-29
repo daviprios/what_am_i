@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/core';
@@ -31,6 +31,8 @@ const Game = () => {
   const route = useRoute<GameParamList>();
   const navigation = useNavigation<GameProp>();
 
+  const initialTime = 60;
+
   const [correctScore, setCorrectScore] = useState(0);
   const [wrongScore, setWrongScore] = useState(0);
   const [passScore, setPassScore] = useState(0);
@@ -44,7 +46,7 @@ const Game = () => {
     () => categoryValuesOrganized[0],
   );
 
-  const [remainingTime, setRemainingTime] = useState(3);
+  const [remainingTime, setRemainingTime] = useState(initialTime);
 
   const nextWord = (response: string) => {
     if (currentWordIndex === categoryValuesOrganized.length + 1) {
@@ -104,15 +106,23 @@ const Game = () => {
   }, [remainingTime]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.counter}>{remainingTime}</Text>
-      <Text>{currentWord}</Text>
-      <Button title="Correct" onPress={() => nextWord('Correct')} />
-      <Button title="Pass" onPress={() => nextWord('Pass')} />
-      <Button title="Wrong" onPress={() => nextWord('Wrong')} />
-      <Text>{correctScore}</Text>
-      <Text>{passScore}</Text>
-      <Text>{wrongScore}</Text>
+      <Text style={styles.word}>{currentWord}</Text>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          style={{...styles.button, backgroundColor: '#00FF0030'}}
+          onPress={() => nextWord('Correct')}
+        />
+        <Pressable
+          style={{...styles.button, backgroundColor: '#0000FF30'}}
+          onPress={() => nextWord('Pass')}
+        />
+        <Pressable
+          style={{...styles.button, backgroundColor: '#FF000030'}}
+          onPress={() => nextWord('Wrong')}
+        />
+      </View>
     </View>
   );
 };
@@ -120,15 +130,46 @@ const Game = () => {
 export default Game;
 
 const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    width: '100%',
+  },
   counter: {
     position: 'absolute',
     top: 15,
-    zIndex: 10,
+    zIndex: -10,
 
     width: '100%',
 
     textAlign: 'center',
 
     fontWeight: 'bold',
+  },
+  word: {
+    position: 'absolute',
+
+    textAlign: 'center',
+    textAlignVertical: 'center',
+
+    height: '100%',
+    width: '100%',
+
+    padding: 30,
+
+    fontSize: 30,
+  },
+  buttonContainer: {
+    position: 'absolute',
+
+    display: 'flex',
+    flexDirection: 'row',
+
+    height: '100%',
+    width: '100%',
+  },
+  button: {
+    flex: 1,
+
+    height: '100%',
   },
 });
